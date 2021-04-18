@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 // import { Counter } from "./Counter";
 import { SuppliersForm } from "./SuppliersForm";
+import { SuppliersTable } from "./SuppliersTable";
+import { generate } from "shortid";
 
 const App: React.FC = () => {
   // return <div>
@@ -13,13 +15,28 @@ const App: React.FC = () => {
   //         )}
   //     </Counter>
   // </div>
+  const [rows, setRows] = useState([
+    {
+      id: "45",
+      name: "Digikey",
+      website: "www.digikey.com",
+    },
+  ]);
+
   return (
     <div style={{ textAlign: "center" }}>
       <SuppliersForm
-        onSubmit={({ name, website }) => {
-          console.log(name, website);
+        onSubmit={(data) => {
+          setRows((currentRows) => [
+            {
+              id: generate(),
+              ...data,
+            },
+            ...currentRows,
+          ]);
         }}
       />
+      <SuppliersTable rows={rows} />
     </div>
   );
 };

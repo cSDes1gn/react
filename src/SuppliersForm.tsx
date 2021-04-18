@@ -16,8 +16,9 @@ export const SuppliersForm: React.FC<Props> = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={{ name: "", website: "" }}
-      onSubmit={(supplier) => {
+      onSubmit={(supplier, { resetForm }) => {
         onSubmit(supplier);
+        resetForm();
       }}
     >
       {({ values }) => (
